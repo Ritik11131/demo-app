@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,45 +11,105 @@ import { SelectModule } from 'primeng/select';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DividerModule } from 'primeng/divider';
 import { AvatarModule } from 'primeng/avatar';
+
+
+import { MenuItem, SelectItem } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
+import { CalendarModule } from 'primeng/calendar';
+import { ChartModule } from 'primeng/chart';
+import { Chip } from 'primeng/chip';
+import { DrawerModule } from 'primeng/drawer';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumber } from 'primeng/inputnumber';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { KnobModule } from 'primeng/knob';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { RadioButton } from 'primeng/radiobutton';
+import { SelectButton } from 'primeng/selectbutton';
+import { Slider } from 'primeng/slider';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { TooltipModule } from 'primeng/tooltip';
+import { Subscription } from 'rxjs';
+
+
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
-  imports: [ButtonModule,InputTextModule,CardModule,ToastModule,DividerModule,SelectModule,MultiSelectModule,AvatarModule],
+  imports: [CommonModule, ButtonModule, InputTextModule, CardModule, ToastModule, DividerModule, SelectModule, MultiSelectModule, AvatarModule, RouterModule, FormsModule, SelectButton, TooltipModule, OverlayBadgeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [MessageService]
 })
 export class AppComponent {
   title = 'demo-app';
-  selectedCity:any;
-  cities = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
-];
-  constructor(private messageService: MessageService) {}
-  showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
-}
 
-showInfo() {
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
-}
 
-showWarn() {
-    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
-}
 
-showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Message Content' });
-}
+  sampleOptions: any[];
+  selectedSampleOption: any;
 
-showContrast() {
-    this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Message Content' });
-}
+  sampleAppsSidebarNavs: any;
 
-showSecondary() {
-    this.messageService.add({ severity: 'secondary', summary: 'Secondary', detail: 'Message Content' });
-}
+  sampleAppsSidebarNavsMore: any;
+
+  selectedSampleAppsSidebarNav: any;
+
+  isSlimMenu: boolean = true;
+
+  dashboardSidebarVisible: boolean = false;
+
+  constructor() {
+
+    this.sampleOptions = [
+      {
+        icon: 'pi pi-home',
+        title: 'Overview',
+        src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/sampleshots/overview'
+      },
+      {
+        icon: 'pi pi-comment',
+        title: 'Chat',
+        src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/sampleshots/chat'
+      },
+      {
+        icon: 'pi pi-inbox',
+        title: 'Inbox',
+        src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/sampleshots/mail'
+      },
+      {
+        icon: 'pi pi-th-large',
+        title: 'Cards',
+        src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/sampleshots/cards'
+      },
+      {
+        icon: 'pi pi-user',
+        title: 'Customers',
+        src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/sampleshots/customers'
+      },
+      {
+        icon: 'pi pi-video',
+        title: 'Movies',
+        src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/sampleshots/movies'
+      }
+    ];
+    this.selectedSampleOption = this.sampleOptions[0];
+
+    this.sampleAppsSidebarNavs = [
+      { icon: 'pi pi-home', title: 'Overview' },
+      { icon: 'pi pi-comment', title: 'Chat' },
+      { icon: 'pi pi-inbox', title: 'Inbox' },
+      { icon: 'pi pi-th-large', title: 'Cards' },
+      { icon: 'pi pi-user', title: 'Customers' },
+      { icon: 'pi pi-video', title: 'Movies' }
+    ];
+    this.sampleAppsSidebarNavsMore = [{ icon: 'pi pi-cog', title: 'Settings' }];
+
+    this.selectedSampleAppsSidebarNav = 'Overview';
+  }
+
+  setSelectedSampleAppsSidebarNav(title: any) {
+    this.selectedSampleAppsSidebarNav = title;
+  }
 }

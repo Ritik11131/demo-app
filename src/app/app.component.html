@@ -2,46 +2,172 @@
 
 
 
-<div class="mb-4 p-8 flex items-center justify-center">
-  <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
-    <ng-template #header>
-      <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-    </ng-template>
-    <ng-template #title> Advanced Card </ng-template>
-    <ng-template #subtitle> Card subtitle </ng-template>
-    <input type="text" pInputText formControlName="text" />
-    <p-select [options]="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
-    <p-multiselect display="chip" appendTo="body" [options]="cities" optionLabel="name" placeholder="Select Cities" [maxSelectedLabels]="3" styleClass="w-full md:w-80" />
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-        </p>
-        <ng-template #footer>
-            <div class="flex gap-4 mt-1">
-                <p-button label="Cancel" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" />
-                <p-button label="Save" class="w-full" styleClass="w-full" />
-            </div>
-        </ng-template>
-    </p-card>
-</div>
+<section class="landing-hero px-8 lg:px-20">
+  <div class="flex flex-col items-center">
+      <div class="w-full flex lg:hidden items-center justify-center mt-16 mb-4">
+          <p-selectbutton [(ngModel)]="selectedSampleOption" [options]="sampleOptions" optionLabel="title" styleClass="dark:border dark:border-white/20">
+              <ng-template let-item pTemplate="item">
+                  <i [class]="item.icon"></i>
+                  <div class="hidden sm:flex flex-1 text-sm font-medium leading-5">{{ item.title }}</div>
+              </ng-template>
+          </p-selectbutton>
+      </div>
+      <div class="bg-surface-0 border border-black/10 dark:border-white/20 dark:bg-surface-950 w-full rounded-3xl p-0 flex lg:hidden items-start gap-6 overflow-hidden">
+          <!-- <ng-container *ngFor="let sampleOption of sampleOptions">
+              <img *ngIf="selectedSampleOption.title === sampleOption.title" [src]="sampleOption.src + '-dark.jpg' " class="w-full" />
+          </ng-container> -->
+      </div>
+      <div class="bg-surface-0 border border-black/10 dark:border-white/20 dark:bg-surface-950 w-full h-[85vh] max-h-[1040px] rounded-3xl p-6 hidden lg:flex lg:mt-20 items-start gap-6 overflow-hidden">
+          <div
+              [ngClass]="{
+                  'w-auto': isSlimMenu,
+                  'w-72': !isSlimMenu
+              }"
+              class="rounded-2xl p-5 bg-surface-50 dark:bg-surface-900 h-full flex flex-col justify-between"
+          >
+              <div
+                  [ngClass]="{
+                      'w-12 flex flex-col items-center': isSlimMenu,
+                      'w-auto': !isSlimMenu
+                  }"
+              >
+                  <div class="flex items-center gap-3">
+                      <div class="w-11 h-11 border border-primary rounded-xl flex items-center justify-center">
+                          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M14.65 11.0645L13.1283 10.7253L14.3119 12.4216V17.6803L18.3698 14.2876V8.52002L16.5099 9.19856L14.65 11.0645Z" fill="var(--p-primary-color)" />
+                              <path d="M5.18078 11.0645L6.70251 10.7253L5.51894 12.4216V17.6803L1.46098 14.2876V8.52002L3.32088 9.19856L5.18078 11.0645Z" fill="var(--p-primary-color)" />
+                              <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6.02649 12.7634L7.37914 10.7278L8.22455 11.2367H11.6062L12.4516 10.7278L13.8042 12.7634V20.397L12.7898 21.9237L11.6062 23.1111H8.22455L7.04098 21.9237L6.02649 20.397V12.7634Z"
+                                  fill="var(--p-primary-color)"
+                              />
+                              <path d="M14.311 20.9058L16.5091 18.7005V16.4952L14.311 18.3612V20.9058Z" fill="var(--p-primary-color)" />
+                              <path d="M5.51868 20.9058L3.32062 18.7005V16.4952L5.51868 18.3612V20.9058Z" fill="var(--p-primary-color)" />
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.578 0.888672H7.7177L6.36505 4.11174L8.56311 10.5579H11.4375L13.4665 4.11174L12.1138 0.888672H10.2543V10.5578H9.578V0.888672Z" fill="var(--p-primary-color)" />
+                              <path d="M8.56283 10.5575L1.29232 7.84329L0.277832 3.60242L6.53385 4.11132L8.73191 10.5575H8.56283Z" fill="var(--p-primary-color)" />
+                              <path d="M11.4372 10.5575L18.7077 7.84329L19.7222 3.60242L13.2971 4.11132L11.2681 10.5575H11.4372Z" fill="var(--p-primary-color)" />
+                              <path d="M13.8041 3.60283L17.3548 3.26356L14.9876 0.888672H12.6205L13.8041 3.60283Z" fill="var(--p-primary-color)" />
+                              <path d="M6.02676 3.60283L2.47604 3.26356L4.84318 0.888672H7.21033L6.02676 3.60283Z" fill="var(--p-primary-color)" />
+                          </svg>
+                      </div>
+                      <div
+                          [ngClass]="{
+                              hidden: isSlimMenu,
+                              block: !isSlimMenu
+                          }"
+                          class="text-surface-950 dark:text-surface-0 font-medium text-3xl"
+                      >
+                          Prime
+                      </div>
+                  </div>
+                  <div class="mt-10 flex flex-col gap-2">
+                      <div
+                          *ngFor="let navItem of sampleAppsSidebarNavs"
+                          [pTooltip]="isSlimMenu ? navItem.title : null"
+                          (click)="setSelectedSampleAppsSidebarNav(navItem.title)"
+                          class="px-4 py-1 flex items-center gap-1 cursor-pointer text-base rounded-lg transition-all select-none"
+                          [ngClass]="{
+                              'w-12 justify-center py-4': isSlimMenu,
+                              'w-full': !isSlimMenu,
+                              'text-muted-color hover:bg-emphasis bg-transparent': selectedSampleAppsSidebarNav !== navItem.title,
+                              'text-primary-contrast bg-primary hover:bg-primary-emphasis': selectedSampleAppsSidebarNav === navItem.title
+                          }"
+                      >
+                          <i [class]="navItem.icon"></i>
+                          <span
+                              [ngClass]="{
+                                  hidden: isSlimMenu,
+                                  'font-medium leading-8': !isSlimMenu
+                              }"
+                              >・</span
+                          >
+                          <span
+                              [ngClass]="{
+                                  hidden: isSlimMenu,
+                                  'font-medium leading-none': !isSlimMenu
+                              }"
+                              >{{ navItem.title }}</span
+                          >
+                      </div>
+                  </div>
+              </div>
+              <div
+                  [ngClass]="{
+                      'w-12 flex flex-col items-center': isSlimMenu,
+                      'w-auto': !isSlimMenu
+                  }"
+              >
+                  <div class="mt-10 flex flex-col gap-2">
+                      <div
+                          *ngIf="false"
+                          [pTooltip]="isSlimMenu ? 'Expanded Mode' : undefined"
+                          class="px-4 py-1 flex items-center gap-1 cursor-pointer text-base rounded-lg transition-all select-none text-muted-color hover:bg-emphasis"
+                          [ngClass]="{
+                              'w-12 justify-center py-4': isSlimMenu,
+                              'w-full': !isSlimMenu
+                          }"
+                      >
+                          <a class="cursor-pointer block p-0 m-0 leading-none">
+                              <a class="cursor-pointer block p-0 m-0 leading-none">
+                                  <i [class]="isSlimMenu ? 'pi pi-window-maximize' : 'pi pi-window-minimize'"></i>
+                                  <span [class]="isSlimMenu ? 'hidden' : 'font-medium leading-8'">・</span>
+                                  <span [class]="isSlimMenu ? 'hidden' : 'font-medium leading-none'"> Slim Mode</span>
+                              </a>
+                          </a>
+                      </div>
+                      <div
+                          *ngFor="let navItem of sampleAppsSidebarNavsMore"
+                          [pTooltip]="isSlimMenu ? navItem.title : null"
+                          (click)="dashboardSidebarVisible = true"
+                          class="px-4 py-1 flex items-center gap-1 cursor-pointer text-base rounded-lg transition-all select-none"
+                          [ngClass]="{
+                              'w-12 justify-center py-4': isSlimMenu,
+                              'w-full': !isSlimMenu,
+                              'text-muted-color hover:bg-emphasis bg-transparent': selectedSampleAppsSidebarNav !== navItem.title,
+                              'text-primary-contrast bg-primary hover:bg-primary-emphasis': selectedSampleAppsSidebarNav === navItem.title
+                          }"
+                      >
+                          <i [class]="navItem.icon"></i>
+                          <span [class]="isSlimMenu ? 'hidden' : 'font-medium leading-8'">・</span>
+                          <span [class]="isSlimMenu ? 'hidden' : 'font-medium leading-none'">{{ navItem.title }}</span>
+                      </div>
+                  </div>
+                  <p-divider />
+                  <div [class]="isSlimMenu ? 'justify-center' : ' gap-3'" class="flex items-center">
+                      <p-avatar image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" size="large" shape="circle" class="shrink-0" />
+                      <div>
+                          <div [class]="isSlimMenu ? 'hidden' : 'text-base font-medium text-color leading-5'">Robin Jonas</div>
+                          <div [class]="isSlimMenu ? 'hidden' : 'text-sm text-muted-color mt-1'">hi&#64;robin.xyz</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
-
-<div class="card flex justify-center gap-2">
-  <p-toast />
-  <p-button type="button" pRipple (click)="showSuccess()" label="Success" severity="success" />
-  <p-button type="button" pRipple (click)="showInfo()" label="Info" severity="info" />
-  <p-button type="button" pRipple (click)="showWarn()" label="Warn" severity="warn" />
-  <p-button type="button" pRipple (click)="showError()" label="Error" severity="danger" />
-  <p-button type="button" pRipple (click)="showSecondary()" label="Secondary" severity="secondary" />
-  <p-button type="button" pRipple (click)="showContrast()" label="Contrast" severity="contrast" />
-</div>
-
-<!-- <div class="landing-hero py-20 px-8 lg:px-20">
-
-  <div class="bg-surface-0 border border-black/10 light:border-white/20 light:bg-surface-950 w-full h-[85vh] max-h-[1040px] rounded-3xl p-6 hidden lg:flex lg:mt-20 items-start gap-6 overflow-hidden">
-    <div class="rounded-2xl p-5 bg-surface-50 light:bg-surface-900 h-full flex flex-col justify-between w-auto">
-      Hello
-      
-    </div>
+          @if(selectedSampleAppsSidebarNav === 'Overview') {
+            <div class="flex-1 h-full overflow-y-auto pb-0.5">
+              <div class="flex flex-wrap gap-4 items-start justify-between p-1">
+                  <div class="flex-1">
+                      <div class="text-muted-color font-medium leading-normal">Overview</div>
+                      <div class="text-color text-3xl font-semibold leading-normal">Welcome to PrimeNG</div>
+                  </div>
+                  <div class="flex gap-2 whitespace-nowrap flex-nowrap">
+                     
+                      <p-button severity="secondary" outlined>
+                          <p-overlayBadge severity="danger" styleClass="!min-w-0 !w-2.5 !h-2.5">
+                              <i class="pi pi-bell"></i>
+                          </p-overlayBadge>
+                      </p-button>
+                  </div>
+              </div>
+              </div>
+          }
+          <!-- <overview-app *ngIf="selectedSampleAppsSidebarNav === 'Overview'" />
+          <chat-app *ngIf="selectedSampleAppsSidebarNav === 'Chat'" />
+          <inbox-app *ngIf="selectedSampleAppsSidebarNav === 'Inbox'" />
+          <cards-app *ngIf="selectedSampleAppsSidebarNav === 'Cards'" />
+          <movies-app *ngIf="selectedSampleAppsSidebarNav === 'Movies'" />
+          <customers-app *ngIf="selectedSampleAppsSidebarNav === 'Customers'" /> -->
+      </div>
   </div>
-</div> -->
+  </section>
