@@ -1,74 +1,31 @@
-<div class="flex flex-wrap gap-4 items-start justify-between p-6 border border-surface rounded-3xl bg-surface-50">
-    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-white w-full sm:w-60">
-      <p-avatar 
-        image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" 
-        class="rounded-lg overflow-hidden w-14 h-14" 
-      />
+<div class="flex flex-wrap gap-4 items-start justify-between p-6 border border-surface rounded-3xl">
+  @for (card of statusCards; track $index) {
+    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-emphasis w-full sm:w-60">
+      <p-avatar [image]="card.avatarUrl" class="rounded-lg overflow-hidden w-14 h-14"></p-avatar>
       <div class="flex-1">
-        <div class="text-blue-500 font-medium leading-7">123456</div>
-        <div class="text-muted-color text-sm mt-1">Total</div>
+        <div [ngClass]="card.color" class="font-medium leading-7">{{ card.count }}</div>
+        <div class="text-muted-color text-sm mt-1">{{ card.status }}</div>
       </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text />
+      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text></p-button>
     </div>
-  
-    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-white w-full sm:w-60">
-      <p-avatar 
-        image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" 
-        class="rounded-lg overflow-hidden w-14 h-14" 
-      />
-      <div class="flex-1">
-        <div class="text-yellow-500 font-medium leading-7">123</div>
-        <div class="text-muted-color text-sm mt-1">Idle</div>
-      </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text />
+  }
+</div>
+
+<div class="flex flex-col gap-6 mt-6">
+
+  <div class="flex gap-6 xl:flex-row flex-col">
+    <div class="flex-2 border border-surface rounded-2xl py-5 px-7">
+      <app-generic-table [data]="[]" [config]="tableConfig" title="All Vehicles" [showActions]="false"
+        (onNew)="handleNew()" (onEdit)="handleEdit($event)" (onDelete)="handleDelete($event)"
+        (onDeleteSelected)="handleDeleteSelected($event)" (onImport)="handleImport($event)"
+        (onExport)="handleExport()" />
     </div>
-  
-    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-white w-full sm:w-60">
-      <p-avatar 
-        image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" 
-        class="rounded-lg overflow-hidden w-14 h-14" 
-      />
-      <div class="flex-1">
-        <div class="text-red-500 font-medium leading-7">233</div>
-        <div class="text-muted-color text-sm mt-1">Stopped</div>
-      </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text />
-    </div>
-  
-    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-white w-full sm:w-60">
-      <p-avatar 
-        image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" 
-        class="rounded-lg overflow-hidden w-14 h-14" 
-      />
-      <div class="flex-1">
-        <div class="text-green-500 font-medium leading-7">4567</div>
-        <div class="text-muted-color text-sm mt-1">Running</div>
-      </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text />
-    </div>
-  
-    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-white w-full sm:w-60">
-      <p-avatar 
-        image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" 
-        class="rounded-lg overflow-hidden w-14 h-14" 
-      />
-      <div class="flex-1">
-        <div class="text-gray-500 font-medium leading-7">234</div>
-        <div class="text-muted-color text-sm mt-1">Offline</div>
-      </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text />
-    </div>
-  
-    <div class="flex items-center gap-3 p-4 border border-surface rounded-xl shadow-[0px_1px_2px_0px_rgba(18,18,23,0.05)] bg-white w-full sm:w-60">
-      <p-avatar 
-        image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png" 
-        class="rounded-lg overflow-hidden w-14 h-14" 
-      />
-      <div class="flex-1">
-        <div class="text-gray-700 font-medium leading-7">263</div>
-        <div class="text-muted-color text-sm mt-1">Never Conn.</div>
-      </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text />
+
+
+    <div class="xl:w-96 border border-surface rounded-2xl py-5 px-7 flex-1 flex-col justify-between">
+     
     </div>
   </div>
-  
+
+
+</div>

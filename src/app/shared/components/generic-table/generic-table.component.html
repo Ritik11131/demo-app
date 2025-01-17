@@ -1,0 +1,179 @@
+@if (config.hasOwnProperty('toolbar')) {
+    <p-toolbar styleClass="mb-4">
+      <ng-template #start>
+        @if (config.toolbar?.showNew) {
+          <p-button
+            [label]="config.toolbar?.newLabel || 'New'"
+            icon="pi pi-plus"
+            class="mr-2"
+            (onClick)="onNew.emit()"
+          />
+        }
+        @if (config.toolbar?.showDelete) {
+          <p-button
+            severity="danger"
+            [label]="config.toolbar?.deleteLabel || 'Delete'"
+            icon="pi pi-trash"
+            [outlined]="true"
+            (onClick)="onDeleteSelected.emit(selectedItems)"
+            [disabled]="!selectedItems.length"
+          />
+        }
+        @for (btn of config.toolbar?.customButtons; track btn.label) {
+          <p-button
+            [label]="btn.label"
+            [icon]="btn.icon"
+            [severity]="btn.severity"
+            class="ml-2"
+            (onClick)="btn.onClick()"
+          />
+        }
+      </ng-template>
+
+      <ng-template #end>
+        @if (config.toolbar?.showImport) {
+          <!-- <p-fileUpload
+            mode="basic"
+            accept="*"
+            [maxFileSize]="1000000"
+            [chooseLabel]="config.toolbar.importLabel || 'Import'"
+            class="mr-2 inline-block"
+            [chooseButtonProps]="{ severity: 'secondary' }"
+            (onSelect)="onImport.emit($event)"
+          /> -->
+        }
+        @if (config.toolbar?.showExport) {
+          <p-button
+            [label]="config.toolbar?.exportLabel || 'Export'"
+            icon="pi pi-upload"
+            severity="secondary"
+            (onClick)="onExport.emit()"
+          />
+        }
+      </ng-template>
+    </p-toolbar>
+  }
+
+  <p-table
+    #dt
+    [value]="data"
+    [columns]="config.columns"
+    [paginator]="config.paginator"
+    [rows]="config.rows || 10"
+    [globalFilterFields]="globalFilterFields"
+    [tableStyle]="{ 'min-width': '55rem' }"
+    [(selection)]="selectedItems"
+    [rowHover]="config.rowHover"
+    [loading]="config.loading"
+    [scrollable]="config.scrollable"
+    [scrollHeight]="config.scrollHeight"
+    [styleClass]="config.styleClass"
+    [showCurrentPageReport]="config.showCurrentPageReport"
+    [responsive]="config.responsive"
+    dataKey="id"
+  >
+    @if (config.globalFilter) {
+      <ng-template #caption>
+        <div class="flex items-center justify-between">
+          <h5 class="m-0">{{ title }}</h5>
+          <p-iconfield>
+            <p-inputicon styleClass="pi pi-search" />
+            <input pInputText type="text" (input)="onSearch($event,dt)" placeholder="Search..." />
+        </p-iconfield>
+        </div>
+      </ng-template>
+    }
+
+    <ng-template #header>
+      <tr>
+        @if (config.selectionMode === 'multiple') {
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox />
+          </th>
+        }
+        @for (col of config.columns; track col.field) {
+          <th
+            [pSortableColumn]="col.sortable ? col.field : undefined"
+            [style.width]="col.width"
+          >
+            {{ col.header }}
+            @if (col.sortable) {
+              <p-sortIcon [field]="col.field" />
+            }
+          </th>
+        }
+        @if (showActions) {
+          <th style="width: 8rem">Actions</th>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-item>
+      <tr>
+        @if (config.selectionMode === 'multiple') {
+          <td>
+            <p-tableCheckbox [value]="item" />
+          </td>
+        }
+        @for (col of config.columns; track col.field) {
+          <td>
+            @switch (col.displayType) {
+              @case ('image') {
+                <img
+                  [src]="col.imageConfig?.baseUrl + item[col.field]"
+                  [alt]="col.imageConfig?.alt || item[col.field]"
+                  [style.width]="col.imageConfig?.width || '64px'"
+                  class="rounded"
+                />
+              }
+              @case ('chip') {
+                <p-tag
+                  [value]="item[col.field]"
+                  [severity]="col.chipSeverity ? col.chipSeverity(item) : undefined"
+                />
+              }
+              @case ('avatar') {
+                <p-avatar
+                  [image]="item[col.field]"
+                  shape="circle"
+                  [size]="col.imageConfig?.width || 'normal'"
+                />
+              }
+              @case ('currency') {
+                {{ item[col.field] | currency: col.currencyCode || 'USD' }}
+              }
+              @default {
+                {{ item[col.field] }}
+              }
+            }
+          </td>
+        }
+        @if (showActions) {
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              class="mr-2"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="onEdit.emit(item)"
+            />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="onDelete.emit(item)"
+            />
+          </td>
+        }
+      </tr>
+    </ng-template>
+
+    @if (showSummary) {
+      <ng-template #summary>
+        <div class="flex items-center justify-between">
+          In total there are {{ data ? data.length : 0 }} items.
+        </div>
+      </ng-template>
+    }
+  </p-table>
