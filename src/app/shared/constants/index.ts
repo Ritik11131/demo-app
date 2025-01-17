@@ -16,37 +16,37 @@ export const statusCards: IstatusCards[] = [
         {
             count: 123456,
             status: 'Total',
-            color: 'text-blue-500',
+            color: 'info',
             avatarUrl: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png'
         },
         {
             count: 123,
             status: 'Idle',
-            color: 'text-yellow-500',
+            color: 'warn',
             avatarUrl: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png'
         },
         {
             count: 233,
             status: 'Stopped',
-            color: 'text-red-500',
+            color: 'danger',
             avatarUrl: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png'
         },
         {
             count: 4567,
             status: 'Running',
-            color: 'text-green-500',
+            color: 'success',
             avatarUrl: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png'
         },
         {
             count: 234,
             status: 'Offline',
-            color: 'text-gray-500',
+            color: 'contrast',
             avatarUrl: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png'
         },
         {
             count: 263,
             status: 'Never Conn.',
-            color: 'text-gray-700',
+            color: 'secondary',
             avatarUrl: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png'
         }
     ];

@@ -6,7 +6,7 @@
         <div [ngClass]="card.color" class="font-medium leading-7">{{ card.count }}</div>
         <div class="text-muted-color text-sm mt-1">{{ card.status }}</div>
       </div>
-      <p-button class="hover:animate-ping" icon="pi pi-map-marker" severity="contrast" text></p-button>
+      <p-button class="hover:animate-ping" icon="pi pi-map-marker" [severity]="card.color" text></p-button>
     </div>
   }
 </div>
