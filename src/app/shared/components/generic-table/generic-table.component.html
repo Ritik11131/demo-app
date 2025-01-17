@@ -67,6 +67,7 @@
     [loading]="config.loading"
     [scrollable]="config.scrollable"
     [scrollHeight]="config.scrollHeight"
+    [size]="'small'"
     [styleClass]="config.styleClass"
     [showCurrentPageReport]="config.showCurrentPageReport"
     [responsive]="config.responsive"
@@ -74,12 +75,12 @@
   >
     @if (config.globalFilter) {
       <ng-template #caption>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between py-3">
           <h5 class="m-0">{{ title }}</h5>
           <p-iconfield>
             <p-inputicon styleClass="pi pi-search" />
             <input pInputText type="text" (input)="onSearch($event,dt)" placeholder="Search..." />
-        </p-iconfield>
+          </p-iconfield>
         </div>
       </ng-template>
     }

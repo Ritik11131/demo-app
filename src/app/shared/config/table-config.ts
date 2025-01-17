@@ -4,9 +4,9 @@ export const dashboardTableConfig: TableConfig = {
     columns: [
       { field: 'code', header: 'Vehice No', sortable: true },
       { field: 'name', header: 'Imei', sortable: true },
-      { field: 'category', header: 'Last Update', sortable: true },
+      { field: 'last_update', header: 'Last Update', sortable: true },
       {
-        field: 'status',
+        field: 'ign',
         header: 'Ignition',
         sortable: true,
         displayType: 'chip',
@@ -24,7 +24,7 @@ export const dashboardTableConfig: TableConfig = {
         }
       },
       {
-        field: 'status',
+        field: 'imm',
         header: 'Immobilizer',
         sortable: true,
         displayType: 'chip',
@@ -41,7 +41,7 @@ export const dashboardTableConfig: TableConfig = {
           }
         }
       },
-      { field: 'category', header: 'Battery Voltage', sortable: true },
+      { field: 'batt_status', header: 'Battery Voltage', sortable: true },
 
     ],
     // toolbar: {

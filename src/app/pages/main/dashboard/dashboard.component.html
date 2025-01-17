@@ -14,7 +14,7 @@
 <div class="flex flex-col gap-6 mt-6">
 
   <div class="flex gap-6 xl:flex-row flex-col">
-    <div class="flex-2 border border-surface rounded-2xl py-5 px-7">
+    <div class="flex-3 border border-surface rounded-2xl px-5">
       <app-generic-table [data]="[]" [config]="tableConfig" title="All Vehicles" [showActions]="false"
         (onNew)="handleNew()" (onEdit)="handleEdit($event)" (onDelete)="handleDelete($event)"
         (onDeleteSelected)="handleDeleteSelected($event)" (onImport)="handleImport($event)"
@@ -22,8 +22,13 @@
     </div>
 
 
-    <div class="xl:w-96 border border-surface rounded-2xl py-5 px-7 flex-1 flex-col justify-between">
-     
+    <div class="xl:w-96 flex-1 flex-col justify-between">
+      <div class="h-96 rounded-2xl"
+      leaflet
+      [leafletOptions]="options"
+      (leafletMapReady)="onMapReady($event)"
+     >
+    </div>
     </div>
   </div>
 
