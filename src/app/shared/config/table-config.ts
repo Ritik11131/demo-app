@@ -28,6 +28,7 @@ export const dashboardTableConfig: TableConfig = {
     paginator: true,
     globalFilter: true,
     selectionMode: 'single',
+    minWidth:'55rem',
     showCurrentPageReport: true,
     rowHover: true,
     responsive: true

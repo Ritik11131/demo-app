@@ -36,6 +36,7 @@ export interface ColumnConfig {
     columns: ColumnConfig[];
     toolbar?: ToolbarConfig;
     paginator?: boolean;
+    minWidth:string;
     rows?: number;
     globalFilter?: boolean;
     selectionMode?: 'single' | 'multiple';
