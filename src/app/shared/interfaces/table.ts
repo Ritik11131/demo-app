@@ -3,10 +3,9 @@ export interface ColumnConfig {
     header: string;
     sortable?: boolean;
     filterType?: 'text' | 'select' | 'date';
-    displayType?: 'text' | 'image' | 'chip' | 'avatar' | 'rating' | 'currency';
+    displayType?: 'text' | 'image' | 'chip' | 'avatar' | 'rating' | 'currency' | 'date';
     width?: string;
     styleClass?: string;
-    chipSeverity?: (item: any) => "success" | "info" | "warn" | "danger" | "secondary" | "contrast" | undefined;
     imageConfig?: {
       baseUrl?: string;
       width?: "normal" | "large" | "xlarge" | undefined;

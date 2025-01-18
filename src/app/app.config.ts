@@ -4,12 +4,16 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Noir from '@/app/themes/app-theme'
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { apiInterceptor } from './core/interceptors/api.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideAnimationsAsync(),
-    providePrimeNG({ theme: Noir, ripple: false, inputStyle: 'outlined' })
+    providePrimeNG({ theme: Noir, ripple: false, inputStyle: 'outlined' }),
+    provideHttpClient(withInterceptors([apiInterceptor])),
+    
   ]
 };

@@ -2,46 +2,21 @@ import { TableConfig } from "../interfaces/table";
 
 export const dashboardTableConfig: TableConfig = {
     columns: [
-      { field: 'code', header: 'Vehice No', sortable: true },
-      { field: 'name', header: 'Imei', sortable: true },
-      { field: 'last_update', header: 'Last Update', sortable: true },
+      { field: 'vehicleNo', header: 'Vehice No', },
+      { field: 'deviceId', header: 'Imei', },
       {
         field: 'ign',
         header: 'Ignition',
-        sortable: true,
+        
         displayType: 'chip',
-        chipSeverity: (item: any) => {
-          switch (item.status) {
-            case 'INSTOCK':
-              return 'success';
-            case 'LOWSTOCK':
-              return 'warn';
-            case 'OUTOFSTOCK':
-              return 'danger';
-            default:
-              return 'info';
-          }
-        }
       },
       {
         field: 'imm',
         header: 'Immobilizer',
-        sortable: true,
         displayType: 'chip',
-        chipSeverity: (item: any) => {
-          switch (item.status) {
-            case 'INSTOCK':
-              return 'success';
-            case 'LOWSTOCK':
-              return 'warn';
-            case 'OUTOFSTOCK':
-              return 'danger';
-            default:
-              return 'info';
-          }
-        }
       },
-      { field: 'batt_status', header: 'Battery Voltage', sortable: true },
+      { field: 'extVolt', header: 'Battery Voltage', },
+      { field: 'deviceTime', header: 'Last Update',  displayType:'date' },
 
     ],
     // toolbar: {

@@ -67,21 +67,46 @@
     [loading]="config.loading"
     [scrollable]="config.scrollable"
     [scrollHeight]="config.scrollHeight"
-    [size]="'small'"
     [styleClass]="config.styleClass"
     [showCurrentPageReport]="config.showCurrentPageReport"
     [responsive]="config.responsive"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     dataKey="id"
   >
     @if (config.globalFilter) {
       <ng-template #caption>
-        <div class="flex items-center justify-between py-3">
+        <!-- <div class="flex items-center justify-between py-3">
           <h5 class="m-0">{{ title }}</h5>
           <p-iconfield>
             <p-inputicon styleClass="pi pi-search" />
             <input pInputText type="text" (input)="onSearch($event,dt)" placeholder="Search..." />
           </p-iconfield>
-        </div>
+        </div> -->
+
+        <div class="flex items-start gap-2 justify-between">
+          <div>
+              <div class="text-2xl leading-8 text-color font-medium">{{title}}</div>
+              <div class="mt-1 leading-6 text-muted-color">The analysis list here shows all {{title}}</div>
+          </div>
+          <div>
+            <p-button icon="pi pi-circle-fill text-green-500 animate-pulse" [label]="activeOnes" outlined severity="secondary" />
+          </div>
+
+      </div>
+
+      <div class="mt-10 mb-4 flex items-center justify-between">
+        <p-iconfield iconPosition="left">
+            <p-inputicon class="pi pi-search"> </p-inputicon>
+            <input pInputText type="text" (input)="onSearch($event,dt)" placeholder="Search..." />
+        </p-iconfield>
+        <!-- <div class="flex items-center gap-3">
+            <p-button icon="pi pi-filter" outlined severity="secondary" />
+            <p-button icon="pi pi-refresh" outlined severity="secondary" />
+            <p-button label="1 of 15" outlined severity="secondary" />
+            <p-button icon="pi pi-chevron-left" outlined severity="secondary" />
+            <p-button icon="pi pi-chevron-right" outlined severity="secondary" />
+        </div> -->
+    </div>
       </ng-template>
     }
 
@@ -129,8 +154,8 @@
               }
               @case ('chip') {
                 <p-tag
-                  [value]="item[col.field]"
-                  [severity]="col.chipSeverity ? col.chipSeverity(item) : undefined"
+                  [value]="item[col.field] ? 'On' : 'Off'"
+                  [severity]="item[col.field] ? 'success' : 'danger'"
                 />
               }
               @case ('avatar') {
@@ -143,8 +168,12 @@
               @case ('currency') {
                 {{ item[col.field] | currency: col.currencyCode || 'USD' }}
               }
+              @case('date') {
+                {{ (item[col.field] | date:'medium') || '-' }}
+
+              }
               @default {
-                {{ item[col.field] }}
+                {{ item[col.field] || '-' }}
               }
             }
           </td>
@@ -171,10 +200,11 @@
     </ng-template>
 
     @if (showSummary) {
-      <ng-template #summary>
+      <!-- <ng-template #summary>
         <div class="flex items-center justify-between">
           In total there are {{ data ? data.length : 0 }} items.
         </div>
-      </ng-template>
+      </ng-template> -->
     }
+    
   </p-table>

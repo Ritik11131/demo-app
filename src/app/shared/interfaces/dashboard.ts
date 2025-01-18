@@ -1,6 +1,7 @@
 export interface IstatusCards {
+    id:number;
     count: number;
     status: string;
-    color:  "success" | "info" | "warn" | "danger" | "help" | "primary" | "secondary" | "contrast" | null | undefined;
+    color:  string;
     avatarUrl: string;
 }

@@ -42,6 +42,7 @@ export class GenericTableComponent {
   @Input() title: string = '';
   @Input() showActions: boolean = true;
   @Input() showSummary: boolean = true;
+  @Input() activeOnes = '';
 
   @Output() onNew = new EventEmitter<void>();
   @Output() onEdit = new EventEmitter<any>();
